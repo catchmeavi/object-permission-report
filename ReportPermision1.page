@@ -1,0 +1,61 @@
+<apex:page controller="reportPermissionController" readOnly="true">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" />
+    <style>
+        
+        .table-outer {
+        	border-collapse: collapse;
+	        border : 2px solid;
+        }
+    .table-inner {
+        //border-collapse: collapse;
+	        border : 1px solid;
+        }
+        table.table-outer { border-collapse: collapse;
+	        border : 1px solid;}
+     	table.table-outer tr {border : 1px solid;} 
+        table.table-outer th {border : 1px solid;}  
+		table.table-outer td {border : 1px solid;}
+        table.table-outer.table-inner { border : 1px solid;}
+
+		table.table-outer.table-inner td {border : 1px solid;}
+   
+    </style>
+    <table  id="table" class="table-outer">
+        <thead>
+        	<tr id="header-row">
+            </tr>
+        </thead>
+        <tr>
+            <apex:repeat value="{!outputWrapMap}" var="key" >
+                <script>
+                	var tr = document.getElementById('table').tHead.children[0],
+                    th = document.createElement('th');
+                	th.innerHTML = "{!key}";
+                	tr.appendChild(th);
+                </script>
+                <td valign="top">
+                    <table class="table-inner">
+                        <th>Object Name</th>
+                        <th>Create</th>
+                        <th>Read</th>
+                        <th>Update</th>
+                        <th>Delete</th>
+                        <th>View All</th>
+                        <th>Modify All</th>
+                        <apex:repeat value="{!outputWrapMap[key]}" var="keyvalue" >
+                            <tr>
+                                <td valign="top" style="text-align:left">{!keyvalue.objectName}</td>  
+                                <td valign="top" style="text-align:center">{!IF(!keyvalue.permissionsCreate == TRUE,'X','')}</td> 
+                                <td valign="top" style="text-align:center">{!IF(!keyvalue.permissionsRead == TRUE,'X','')}</td> 
+                                <td valign="top" style="text-align:center">{!IF(!keyvalue.permissionsEdit == TRUE,'X','')}</td> 
+                                <td valign="top" style="text-align:center">{!IF(!keyvalue.permissionsDelete == TRUE,'X','')}</td> 
+                                <td valign="top" style="text-align:center">{!IF(!keyvalue.permissionsViewAllRecords == TRUE,'X','')}</td> 
+                                <td valign="top" style="text-align:center">{!IF(!keyvalue.permissionsModifyAllRecords == TRUE,'X','')}</td> 
+                            </tr>
+                        </apex:repeat> 
+                    </table>
+                </td>
+            </apex:repeat>
+        </tr>
+    </table>
+</apex:page>
