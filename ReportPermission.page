@@ -1,0 +1,35 @@
+<apex:page controller="reportPermissionController" readOnly="true" docType="html-5.0" sidebar="false" showHeader="false">
+    <apex:slds /> 
+    <body class="slds-scope">    
+        <table class="slds-table slds-table_bordered slds-table_cell-buffer slds-table_col-bordered">
+            <thead>
+                <tr class="slds-text-title_caps">
+                    <th scope="col">Profile</th>
+                    <th scope="col">Object Name</th>
+                    <th scope="col">Create</th>
+                    <th scope="col">Read</th>
+                    <th scope="col">Update</th>
+                    <th scope="col">Delete</th>
+                    <th scope="col">View All</th>
+                    <th scope="col">Modify All</th>
+                </tr>
+            </thead>
+            <tbody>
+                <apex:repeat value="{!outputWrapMap}" var="key" >
+                    <apex:repeat value="{!outputWrapMap[key]}" var="keyvalue" >
+                        <tr>
+                            <td valign="top" style="text-align:left">{!keyvalue.profileName}</td>  
+                            <td valign="top" style="text-align:left">{!keyvalue.objectName}</td>  
+                            <td valign="top" style="text-align:center">{!IF(!keyvalue.permissionsCreate == TRUE,'✔','')}</td> 
+                            <td valign="top" style="text-align:center">{!IF(!keyvalue.permissionsRead == TRUE,'✔','')}</td> 
+                            <td valign="top" style="text-align:center">{!IF(!keyvalue.permissionsEdit == TRUE,'✔','')}</td> 
+                            <td valign="top" style="text-align:center">{!IF(!keyvalue.permissionsDelete == TRUE,'✔','')}</td> 
+                            <td valign="top" style="text-align:center">{!IF(!keyvalue.permissionsViewAllRecords == TRUE,'✔','')}</td> 
+                            <td valign="top" style="text-align:center">{!IF(!keyvalue.permissionsModifyAllRecords == TRUE,'✔','')}</td> 
+                        </tr>
+                    </apex:repeat> 
+                </apex:repeat>
+            </tbody>
+        </table>
+    </body>
+</apex:page>
