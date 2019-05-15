@@ -1,3 +1,6 @@
+/**
+* @author Avijit C
+**/
 public class reportPermissionController {
     public List<ObjectPermissions> permissions {get;set;}
     public Map<String,List<permissionWrapper>> outputWrapMap {get;set;}{outputWrapMap = new Map<String,List<permissionWrapper>>(); }
